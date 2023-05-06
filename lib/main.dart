@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app_using_socket/socketClient/loginScreen.dart';
+import 'package:flutter_chat_app_using_socket/views/pages/socketClient/loginScreen.dart';
 
 import 'Routes.dart';
 

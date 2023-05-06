@@ -1,28 +1,17 @@
 import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImport.dart';
+import 'package:flutter_chat_app_using_socket/views/pages/socketClient/chatScreen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     switch (settings.name) {
       // chatHomePage pages
-      case chatHomePage:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const ChatPage(),
-        );
 
       // chatNewMessage page
       case newMessagePage:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const NewMessagePage(),
-        );
-
-      // chatRecentMessage page
-      case recentMessagePage:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const RecentMessagePage(),
+          builder: (_) => const ChatScreen(),
         );
 
       //chatM
