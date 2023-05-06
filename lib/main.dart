@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app_using_socket/socketClient/loginScreen.dart';
+
+import 'Routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +19,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: Routes.routes(),
+      initialRoute: Routes.initScreen(),
+      home: const LoginScreen(),
     );
   }
 }
