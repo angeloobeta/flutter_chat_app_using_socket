@@ -23,6 +23,7 @@ class UserChatScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
+                          G.socketUtils?.closeConnection();
                           Navigator.pop(context);
                         },
                         child: GeneralIconDisplay(
@@ -36,7 +37,20 @@ class UserChatScreen extends StatelessWidget {
                   left: 20,
                   right: 20),
               AdaptivePositioned(
+                  GeneralTextDisplay(
+                      model.connectedToSocket!
+                          ? "Connected"
+                          : model.connectMessage!,
+                      black,
+                      1,
+                      14,
+                      FontWeight.normal,
+                      ""),
                   top: 50,
+                  left: 20,
+                  right: 20),
+              AdaptivePositioned(
+                  top: 70,
                   left: 20,
                   right: 20,
                   S(

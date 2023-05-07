@@ -18,14 +18,55 @@ class UserChatViewModel extends BaseModel {
     connectedToSocket = false;
     connectMessage = "Connecting ....";
     notifyListeners();
+    onConnectToSocket();
   }
 
   //
-  onConnectToSocket() {
+  onConnectToSocket() async {
     G.initSocket();
     developer.log(
         "Connecting login user ${G.loggedInUser!.name}  ${G.loggedInUser!.id}");
-    G.socketUtils!.initSocket(G.loggedInUser!);
+    await G.socketUtils!.initSocket(G.loggedInUser!);
     G.socketUtils!.connectToSocket();
+    G.socketUtils!.setConnectionListener(onConnect);
+    G.socketUtils!.setConnectionErrorListener(onConnectionError);
+    G.socketUtils!.setConnectionTimedOutListener(onConnectionTimeout);
+    G.socketUtils!.setOnErrorListener(onError);
+    G.socketUtils!.setOnDisconnectListener(onDisconnectListener);
+  }
+
+  onConnectionError(data) {
+    //
+    connectedToSocket = false;
+    connectMessage = "Connection Error";
+    notifyListeners();
+  }
+
+  onConnectionTimeout(data) {
+    //
+    connectedToSocket = false;
+    connectMessage = "Connection Timeout";
+    notifyListeners();
+  }
+
+  onConnect(data) {
+    //
+    connectedToSocket = true;
+    connectMessage = "Connected";
+    notifyListeners();
+  }
+
+  onError(data) {
+    //
+    connectedToSocket = false;
+    connectMessage = "Connection Error";
+    notifyListeners();
+  }
+
+  onDisconnectListener(data) {
+    //
+    connectedToSocket = false;
+    connectMessage = "Connection disconnected";
+    notifyListeners();
   }
 }

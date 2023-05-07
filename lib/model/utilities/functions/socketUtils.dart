@@ -71,7 +71,7 @@ class SocketUtils {
   }
 
   // check if there is error
-  setConnectionErrorTimedOutListener(Function onConnectionTimeout) {
+  setConnectionTimedOutListener(Function onConnectionTimeout) {
     if (socketIO!.onConnectTimeout != null) {
       ((data) {
         onConnectionTimeout(data);
