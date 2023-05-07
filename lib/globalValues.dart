@@ -1,9 +1,12 @@
 import 'model/models/userModel.dart';
+import 'model/utilities/functions/socketUtils.dart';
 
 class G {
   static List<UserModel>? dummyUser = [];
 
   static UserModel? loggedInUser;
+
+  static SocketUtils? socketUtils;
 
   static void initialDummy() {
     UserModel UserA =
@@ -20,5 +23,10 @@ class G {
             .contains(userModel.name!.toLowerCase())))
         .toList();
     return filteredUser;
+  }
+
+  //
+  static initSocket() {
+    socketUtils ??= SocketUtils();
   }
 }

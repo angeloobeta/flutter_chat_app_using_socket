@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter_chat_app_using_socket/globalValues.dart';
 import 'package:flutter_chat_app_using_socket/model/models/userModel.dart';
 import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImport.dart';
@@ -26,6 +28,7 @@ class LoginViewModel extends BaseModel {
     notifyListeners();
     if (usernameController.text != 'a') {
       me = G.dummyUser![1];
+      developer.log("${me!.name}");
       notifyListeners();
     }
     G.loggedInUser = me;

@@ -11,6 +11,6 @@ class BaseModel extends ChangeNotifier {
 // onChange username function
 
   onOpenUserListScreen(context) async {
-    await Navigator.pushReplacementNamed(context, UserChatScreen.ROUTES_ID);
+    await Navigator.pushNamed(context, UserChatScreen.ROUTES_ID);
   }
 }
