@@ -62,37 +62,49 @@ class SocketUtils {
 
   // check if the connection is successful
   setConnectionListener(Function onConnect) {
-    socketIO.onConnect((data) {
-      onConnect(data);
-    })!;
+    if (socketIO!.onConnect != null) {
+      (data) {
+        onConnect(data);
+      };
+    }
+    ;
   }
 
   // check if there is error
   setConnectionErrorTimedOutListener(Function onConnectionTimeout) {
-    socketIO.onConnectTimeout((data) {
-      onConnectionTimeout(data);
-    })!;
+    if (socketIO!.onConnectTimeout != null) {
+      ((data) {
+        onConnectionTimeout(data);
+      });
+    }
+    ;
   }
 
   //
   setConnectionErrorListener(Function onConnectionError) {
-    socketIO.onConnectError((data) {
-      onConnectionError(data);
-    });
+    if (socketIO!.onConnectError != null) {
+      ((data) {
+        onConnectionError(data);
+      });
+    }
   }
 
 //
   setOnErrorListener(Function onError) {
-    socketIO.onError((data) {
-      onError(data);
-    });
+    if (socketIO!.onError != null) {
+      ((data) {
+        onError(data);
+      });
+    }
   }
 
 //
   setOnDisconnectListener(Function onDisconnectListener) {
-    socketIO.onDisconnect((data) {
-      onDisconnectListener(data);
-    });
+    if (socketIO!.onDisconnect != null) {
+      ((data) {
+        onDisconnectListener(data);
+      });
+    }
   }
 
   //
