@@ -1,4 +1,4 @@
-import 'package:flutter_chat_app_using_socket/globalValues.dart';
+import 'package:flutter_chat_app_using_socket/part%201%20(adhara-package)/globalValues.dart';
 import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImport.dart';
 import 'package:flutter_chat_app_using_socket/viewmodel/socketClientViewModel/userChatViewModel.dart';
 

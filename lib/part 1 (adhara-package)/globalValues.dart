@@ -1,5 +1,5 @@
-import 'model/models/userModel.dart';
-import 'model/utilities/functions/socketUtils.dart';
+import '../model/models/userModel.dart';
+import '../model/utilities/functions/socketUtils.dart';
 
 class G {
   static List<UserModel>? dummyUser = [];

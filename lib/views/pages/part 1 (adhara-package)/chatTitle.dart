@@ -1,6 +1,6 @@
 import 'package:flutter_chat_app_using_socket/model/models/userModel.dart';
 
-import '../../model/utilities/imports/generalImport.dart';
+import '../../../model/utilities/imports/generalImport.dart';
 
 class ChatTitle extends StatelessWidget {
   UserModel? chatUser;

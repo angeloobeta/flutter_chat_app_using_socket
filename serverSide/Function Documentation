@@ -1,0 +1,24 @@
+Events
+    connection
+
+to_user_id
+
+
+Functions
+    onEachUserConnection -> onMessage(socket), onlineUsers(),
+                            checkOnline(socket), onDisconnect(socket)
+    onlineCheckHandler ->
+    sendBackToClient
+    singleChatHandler
+    sentToConnectedSocket
+    onCheckOnline
+    onDisconnect
+    onMessage
+    onlineUsers
+    checkOnline
+    removeUserWithSocketIdFromMap
+    addUserMap
+    getSocketIdFromMapForThisUser
+
+
+    stringifyToJson
