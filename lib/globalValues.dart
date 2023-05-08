@@ -12,7 +12,7 @@ class G {
     UserModel UserA =
         UserModel(id: 1001, email: "userA@email.com", name: "userA");
     UserModel UserB =
-        UserModel(id: 1001, email: "userB@email.com", name: "userB");
+        UserModel(id: 1002, email: "userB@email.com", name: "userB");
     dummyUser!.addAll([UserA, UserB]);
   }
 

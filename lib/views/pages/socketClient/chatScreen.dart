@@ -1,3 +1,4 @@
+import 'package:flutter_chat_app_using_socket/globalValues.dart';
 import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImport.dart';
 import 'package:flutter_chat_app_using_socket/viewmodel/socketClientViewModel/chatScreenViewModel.dart';
 import 'package:flutter_chat_app_using_socket/views/pages/chatTitle.dart';
@@ -12,12 +13,25 @@ class ChatScreen extends StatelessWidget {
         viewModelBuilder: () => ChatScreenViewModel(),
         onViewModelReady: (model) {
           model.onChatScreen(context);
+          model.initialiseSocketListener();
         },
         builder: (BuildContext context, model, Widget? child) =>
             BaseUi(allowBackButton: false, children: [
               AdaptivePositioned(
-                  GeneralTextDisplay(
-                      "Chat Screen", black, 1, 30, FontWeight.bold, ""),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          G.socketUtils?.closeConnection();
+                          Navigator.pop(context);
+                        },
+                        child: GeneralIconDisplay(
+                            LineIcons.arrowLeft, black, UniqueKey(), 20),
+                      ),
+                      GeneralTextDisplay(
+                          "Chat Screen", black, 1, 30, FontWeight.bold, ""),
+                    ],
+                  ),
                   top: 70,
                   left: 20,
                   right: 20),
@@ -67,7 +81,10 @@ class ChatScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          model.onSendMessage(context);
+                          model.onProcessMessage(model.chatMessageModel);
+                        },
                         icon: GeneralIconDisplay(
                             LineIcons.arrowRight, black, UniqueKey(), 20),
                       )
