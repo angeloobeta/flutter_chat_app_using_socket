@@ -5,6 +5,7 @@ class ChatMessageModel {
   String? from;
   String? chatType;
   bool? toUserOnlineStatus;
+  bool? isFromMe;
 
   ChatMessageModel(
       {this.chatId,
@@ -12,7 +13,8 @@ class ChatMessageModel {
       this.message,
       this.from,
       this.chatType,
-      this.toUserOnlineStatus});
+      this.toUserOnlineStatus,
+      this.isFromMe});
 
   factory ChatMessageModel.fromMap(Map<String, dynamic> map) {
     return ChatMessageModel(
@@ -21,7 +23,8 @@ class ChatMessageModel {
         message: map["message"] as String,
         from: map["from"] as String,
         chatType: ["chatType"] as String,
-        toUserOnlineStatus: ["toUserOnlineStatus"] as bool);
+        toUserOnlineStatus: ["toUserOnlineStatus"] as bool,
+        isFromMe: ["isFromMe"] as bool);
   }
 
   Map<String, dynamic> toMap() => {

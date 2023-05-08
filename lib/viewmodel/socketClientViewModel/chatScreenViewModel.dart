@@ -8,7 +8,22 @@ import 'package:flutter_chat_app_using_socket/model/utilities/functions/socketUt
 import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImport.dart';
 
 class ChatScreenViewModel extends BaseModel {
-  TextEditingController? chatEditingController = TextEditingController();
+  TextEditingController chatEditingController = TextEditingController();
+
+  //
+  ScrollController? scrollController = ScrollController(initialScrollOffset: 0);
+
+  // controller the scrolling
+  onChatScrollController() {
+    Timer(const Duration(milliseconds: 100), () {
+      if (scrollController!.hasClients) {
+        scrollController?.animateTo(scrollController!.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.decelerate);
+      }
+    });
+  }
+
   //
   List<UserModel> chatUsers = G.getUsersFor(G.loggedInUser!);
 
@@ -38,6 +53,7 @@ class ChatScreenViewModel extends BaseModel {
           to: toChatUsers!.id.toString(),
           toUserOnlineStatus: false,
           message: chatEditingController!.text,
+          isFromMe: true,
           chatType: SocketUtils.Single_Chat);
       G.socketUtils?.sendSingleChatMessage(chatMessageModel!);
     }
@@ -53,12 +69,14 @@ class ChatScreenViewModel extends BaseModel {
   //
   checkOnline() {
     chatMessageModel = ChatMessageModel(
-        chatId: 0,
-        from: G.loggedInUser?.id.toString(),
-        to: toChatUsers!.id.toString(),
-        toUserOnlineStatus: false,
-        message: '',
-        chatType: SocketUtils.Single_Chat);
+      chatId: 0,
+      from: G.loggedInUser?.id.toString(),
+      to: toChatUsers!.id.toString(),
+      toUserOnlineStatus: false,
+      message: '',
+      isFromMe: true,
+      chatType: SocketUtils.Single_Chat,
+    );
     G.socketUtils!.checkOnline(chatMessageModel!);
   }
 
@@ -74,7 +92,10 @@ class ChatScreenViewModel extends BaseModel {
 
   onMessageReceived(data) {
     developer.log("OnChatMessage Received: $data");
-    onProcessMessage(ChatMessageModel.fromMap(data));
+    chatMessageModel = ChatMessageModel.fromMap(data);
+    chatMessageModel!.isFromMe = false;
+    onProcessMessage(chatMessageModel!);
+    onChatScrollController();
     notifyListeners();
   }
 
@@ -82,5 +103,13 @@ class ChatScreenViewModel extends BaseModel {
   onProcessMessage(data) {
     // add each send message
     chatMessages!.add(data);
+  }
+
+  @override
+  void removeListener(VoidCallback listener) async {
+    G.socketUtils?.setOnMessageReceiveListener(onMessageReceived);
+    G.socketUtils?.setOnlineUserStatusListener(onUserStatus);
+    checkOnline();
+    super.removeListener(listener);
   }
 }

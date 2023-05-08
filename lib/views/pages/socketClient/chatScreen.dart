@@ -23,6 +23,7 @@ class ChatScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           G.socketUtils?.closeConnection();
+                          model.removeListener(() {});
                           Navigator.pop(context);
                         },
                         child: GeneralIconDisplay(
@@ -46,10 +47,21 @@ class ChatScreen extends StatelessWidget {
                 S(
                   h: 100,
                   child: ListView.builder(
-                      itemCount: model.chatUsers!.length,
+                      controller: model.scrollController,
+                      itemCount: model.chatUsers.length,
                       itemBuilder: (itemBuilder, index) {
-                        return GeneralTextDisplay(model.chatUsers![index].name!,
-                            black, 1, 20, FontWeight.normal, "");
+                        return Container(
+                          alignment: model.chatMessageModel!.isFromMe!
+                              ? Alignment.topRight
+                              : Alignment.topLeft,
+                          child: GeneralTextDisplay(
+                              model.chatUsers[index].name!,
+                              model.chatMessageModel!.isFromMe! ? black : green,
+                              1,
+                              20,
+                              FontWeight.normal,
+                              ""),
+                        );
                       }),
                 ),
                 top: 120,
