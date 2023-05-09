@@ -1,5 +1,4 @@
 import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImport.dart';
-import 'package:flutter_chat_app_using_socket/views/pages/socketClient/chatScreen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -8,11 +7,11 @@ class RouteGenerator {
       // chatHomePage pages
 
       // chatNewMessage page
-      case newMessagePage:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const ChatScreen(),
-        );
+      // case newMessagePage:
+      //   return MaterialPageRoute(
+      //     settings: settings,
+      //     builder: (_) => const ChatScreen(),
+      //   );
 
       //chatM
       default:
