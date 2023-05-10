@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app_using_socket/model/utilities/imports/constantImport.dart';
+import 'package:flutter_chat_app_using_socket/views/pages/groupPage/groupChat.dart';
+import 'package:flutter_chat_app_using_socket/views/pages/homePage/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +19,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      onGenerateRoute: RouteGenerator.generateRoute,
+      home: const GroupChat(),
     );
   }
 }

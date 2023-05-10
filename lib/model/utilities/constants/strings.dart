@@ -18,9 +18,8 @@ const String tokenKey = 'token';
 // page route string
 const String onBoard = '/onBoard';
 const String login = '/login';
-const String chatHomePage = "/ChatHomePage";
-const String newMessagePage = "/NewMessagePage";
-const String recentMessagePage = "/RecentMessagePage";
+const String chatPage = "/ChatPage";
+const String groupChatPage = "/GroupChatPage";
 
 // error string
 const String networkError =
