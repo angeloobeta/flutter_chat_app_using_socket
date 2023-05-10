@@ -18,6 +18,6 @@ function  printLog(text) {
     console.log(text);
 }
 
-createServer.listen(6000, "0.0.0.0",() =>{
+createServer.listen(3000, "0.0.0.0",() =>{
     printLog("Server is up and running so what's next")
 });
