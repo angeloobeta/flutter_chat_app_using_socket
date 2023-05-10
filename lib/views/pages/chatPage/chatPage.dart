@@ -2,11 +2,18 @@ import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImp
 import 'package:flutter_chat_app_using_socket/viewmodel/chat/chatViewModel.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  // final String fromTextEditing;
+  const ChatPage({
+    Key? key,
+    // required this.fromTextEditing
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ChatViewModel>.reactive(
+        onViewModelReady: (model) async {
+          await model.onConnectSocket(context);
+        },
         viewModelBuilder: () => ChatViewModel(),
         builder: (context, model, child) {
           return BaseUi(safeTop: true, children: [
@@ -16,8 +23,17 @@ class ChatPage extends StatelessWidget {
               right: 20,
               S(
                   h: 100,
-                  child: GeneralTextDisplay("Chat Page", grey.withOpacity(0.9),
-                      1, 30, FontWeight.bold, "")),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back_outlined)),
+                      GeneralTextDisplay("Text Chat Page",
+                          grey.withOpacity(0.9), 1, 30, FontWeight.bold, ""),
+                    ],
+                  )),
             ),
             Positioned(
               left: 20,

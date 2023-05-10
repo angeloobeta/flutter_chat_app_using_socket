@@ -33,7 +33,10 @@ class GroupChat extends StatelessWidget {
                         // model.onValidate(
                         //     context, model.textEditingController.text);
                         model.onPressEnter(context);
-                        Navigator.pushNamed(context, chatPage);
+                        Navigator.pushNamed(
+                            context,
+                            // arguments: model.textEditingController.text,
+                            chatPage);
                       },
                       child: Text("Enter")),
                   TextButton(
