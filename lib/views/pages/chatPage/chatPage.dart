@@ -1,6 +1,8 @@
 import 'package:flutter_chat_app_using_socket/model/utilities/imports/generalImport.dart';
 import 'package:flutter_chat_app_using_socket/viewmodel/chat/chatViewModel.dart';
 
+import '../../reusableWidgets/chat/ownMessage.dart';
+
 class ChatPage extends StatelessWidget {
   // final String fromTextEditing;
   const ChatPage({
@@ -11,8 +13,8 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ChatViewModel>.reactive(
-        onViewModelReady: (model) async {
-          await model.onConnectSocket(context);
+        onViewModelReady: (model) {
+          // model.onConnectSocket(context);
         },
         viewModelBuilder: () => ChatViewModel(),
         builder: (context, model, child) {
@@ -27,6 +29,7 @@ class ChatPage extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
+                            // model.onDisconnectSocket(context);
                             Navigator.pop(context);
                           },
                           icon: Icon(Icons.arrow_back_outlined)),
@@ -36,6 +39,27 @@ class ChatPage extends StatelessWidget {
                   )),
             ),
             Positioned(
+                left: 20,
+                right: 20,
+                top: 100,
+                bottom: 120,
+                child: S(
+                  h: 560,
+                  child: ListView.builder(
+                    itemCount: model.listOfMessage?.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ownMessage(context,
+                          messageBody: model.listOfMessage![index].message,
+                          sender: model.listOfMessage![index].from,
+                          fromMe: model.listOfMessage![index].isFromMe);
+                    },
+
+                    // model.listOfMessage!
+                    //     .map((e) => ownMessage(context, fromMe: true))
+                    //     .toList(),
+                  ),
+                )),
+            Positioned(
               left: 20,
               right: 20,
               bottom: 50,
@@ -44,7 +68,7 @@ class ChatPage extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       keyboardType: TextInputType.text,
-                      controller: model.textEditingController,
+                      controller: model.payloadEditingController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderSide:
@@ -56,7 +80,10 @@ class ChatPage extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.send_rounded))
+                      onPressed: () {
+                        // model.onSendData(context);
+                      },
+                      icon: const Icon(Icons.send_rounded))
                 ],
               ),
             )
