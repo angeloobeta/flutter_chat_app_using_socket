@@ -13,6 +13,7 @@ io.on("connection", (socket)=>{
     socket.on("backend", (message)=>{
         // printLog("We just established a connection for the id: " + `${socket.id}`);
         printLog(message);
+        socket.emit("serverSide", {...message, isFromMe: false});
     });
 });
 

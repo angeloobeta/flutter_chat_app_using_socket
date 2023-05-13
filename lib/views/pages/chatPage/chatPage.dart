@@ -14,7 +14,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ChatViewModel>.reactive(
         onViewModelReady: (model) {
-          // model.onConnectSocket(context);
+          model.onConnectSocket(context);
         },
         viewModelBuilder: () => ChatViewModel(),
         builder: (context, model, child) {
@@ -29,10 +29,10 @@ class ChatPage extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            // model.onDisconnectSocket(context);
+                            model.onDisconnectSocket(context);
                             Navigator.pop(context);
                           },
-                          icon: Icon(Icons.arrow_back_outlined)),
+                          icon: const Icon(Icons.arrow_back_outlined)),
                       GeneralTextDisplay("Text Chat Page",
                           grey.withOpacity(0.9), 1, 30, FontWeight.bold, ""),
                     ],
@@ -53,10 +53,6 @@ class ChatPage extends StatelessWidget {
                           sender: model.listOfMessage![index].from,
                           fromMe: model.listOfMessage![index].isFromMe);
                     },
-
-                    // model.listOfMessage!
-                    //     .map((e) => ownMessage(context, fromMe: true))
-                    //     .toList(),
                   ),
                 )),
             Positioned(
@@ -81,7 +77,7 @@ class ChatPage extends StatelessWidget {
                   ),
                   IconButton(
                       onPressed: () {
-                        // model.onSendData(context);
+                        model.onSendMessage(context);
                       },
                       icon: const Icon(Icons.send_rounded))
                 ],

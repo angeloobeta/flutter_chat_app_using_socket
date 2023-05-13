@@ -1,9 +1,12 @@
 import 'dart:developer' as developer;
 import 'dart:io';
 
+import 'package:flutter_chat_app_using_socket/model/models/messageModel.dart';
+import 'package:flutter_chat_app_using_socket/viewmodel/baseModel.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
-class SocketClient {
+class SocketClient extends BaseModel {
+  // ChatViewModel chatViewModel = ChatViewModel();
   Socket? socket;
 
   // server ip address
@@ -36,6 +39,18 @@ class SocketClient {
     socket!.onConnect((_) {
       developer.log("E  don connect oh aah");
       socket!.emit("backend", "Message: E don enter now oh");
+      socket!.on("serverSide", (message) {
+        listOfMessage!.add(MessageModel(
+            chatType: message["chatType"],
+            to: "Beta",
+            from: "BetaByte",
+            toUserOnlineStatus: true,
+            isFromMe: message["isFromMe"],
+            message: message));
+        notifyListeners();
+        developer.log(message.toString());
+        developer.log("E be like say backend don reply us:");
+      });
     });
 
     // Listen for connection errors
