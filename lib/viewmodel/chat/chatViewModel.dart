@@ -25,7 +25,7 @@ class ChatViewModel extends BaseModel {
 
   onSendMessage(context) {
     listOfMessage!.add(MessageModel(
-        chatId: 01,
+        chatId: userID.v1(),
         to: "BetaByte",
         from: "Beta",
         message: payloadEditingController.text,

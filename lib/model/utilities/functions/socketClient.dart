@@ -40,13 +40,14 @@ class SocketClient extends BaseModel {
       developer.log("E  don connect oh aah");
       socket!.emit("backend", "Message: E don enter now oh");
       socket!.on("serverSide", (message) {
-        listOfMessage!.add(MessageModel(
-            chatType: message["chatType"],
-            to: "Beta",
-            from: "BetaByte",
-            toUserOnlineStatus: true,
-            isFromMe: message["isFromMe"],
-            message: message));
+        if (message["chatId"] != userID.v1())
+          listOfMessage!.add(MessageModel(
+              chatType: message["chatType"],
+              to: "Beta",
+              from: "BetaByte",
+              toUserOnlineStatus: true,
+              isFromMe: message["isFromMe"],
+              message: message));
         notifyListeners();
         developer.log(message.toString());
         developer.log("E be like say backend don reply us:");

@@ -3,8 +3,11 @@ import 'dart:developer' as developer;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_chat_app_using_socket/model/models/messageModel.dart';
 import 'package:flutter_chat_app_using_socket/model/utilities/constants/strings.dart';
+import 'package:uuid/uuid.dart';
 
 class BaseModel extends ChangeNotifier {
+  // Uuid uuid = Uuid();
+  // final String userId = uuid.v1().toString();
   //
   // List<MessageModel>? listOfMessage = [
   //   MessageModel(
@@ -280,6 +283,8 @@ class BaseModel extends ChangeNotifier {
   //       isFromMe: true,
   //       toUserOnlineStatus: true),
   // ];
+
+  var userID = const Uuid();
 
   List<MessageModel>? listOfMessage = [];
 

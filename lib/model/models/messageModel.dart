@@ -1,5 +1,5 @@
 class MessageModel {
-  int? chatId;
+  String? chatId;
   String? to;
   String? message;
   String? from;
@@ -18,7 +18,7 @@ class MessageModel {
 
   factory MessageModel.fromMap(Map<String, dynamic> map) {
     return MessageModel(
-        chatId: map["chatId"] as int,
+        chatId: map["chatId"] as String,
         to: map["to"] as String,
         message: map["message"] as String,
         from: map["from"] as String,

@@ -10,10 +10,12 @@ app().route("/").get((request, response) =>{
 });
 
 io.on("connection", (socket)=>{
+    printLog("Connected to backend");
+    socket.join("anonymous_group")
     socket.on("backend", (message)=>{
-        // printLog("We just established a connection for the id: " + `${socket.id}`);
+        io.to(anonymous_group).emit("serverSide", {...message, isFromMe: false});
+        printLog("We just established a connection for the id: " + `${socket.id}`);
         printLog(message);
-        socket.emit("serverSide", {...message, isFromMe: false});
     });
 });
 
