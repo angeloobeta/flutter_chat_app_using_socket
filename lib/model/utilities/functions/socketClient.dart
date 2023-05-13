@@ -40,7 +40,7 @@ class SocketClient extends BaseModel {
       developer.log("E  don connect oh aah");
       socket!.emit("backend", "Message: E don enter now oh");
       socket!.on("serverSide", (message) {
-        if (message["chatId"] != userID.v1())
+        if (message["chatId"] != userID.v1()) {
           listOfMessage!.add(MessageModel(
               chatType: message["chatType"],
               to: "Beta",
@@ -48,6 +48,7 @@ class SocketClient extends BaseModel {
               toUserOnlineStatus: true,
               isFromMe: message["isFromMe"],
               message: message));
+        }
         notifyListeners();
         developer.log(message.toString());
         developer.log("E be like say backend don reply us:");
